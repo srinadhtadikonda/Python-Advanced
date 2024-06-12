@@ -5,12 +5,7 @@ import mysql.connector
 def fetch_record_from_mysql(eno):
     try:
         # Connect to the MySQL database
-        conn = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='sriinformatics',
-            database='demobase'
-        )
+        conn = mysql.connector.connect(host='localhost',user='root',password='sriinformatics',database='demobase')
         cursor = conn.cursor()
         cursor.execute("SELECT eno, ename, esal, egrade FROM myemp WHERE eno = %s", (eno,))
         row = cursor.fetchone()
@@ -23,12 +18,7 @@ def fetch_record_from_mysql(eno):
 def update_record_in_mysql(old_eno, new_eno, ename, esal, egrade):
     try:
         # Connect to the MySQL database
-        conn = mysql.connector.connect(
-            host='localhost',
-            user='your_mysql_username',
-            password='your_mysql_password',
-            database='demobase'
-        )
+        conn = mysql.connector.connect(host='localhost',user='root',password='sriinformatics',database='demobase')
         cursor = conn.cursor()
         cursor.execute(
             "UPDATE myemp SET eno = %s, ename = %s, esal = %s, egrade = %s WHERE eno = %s",
