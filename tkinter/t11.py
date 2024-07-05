@@ -16,15 +16,16 @@ radio_var = tk.StringVar()
 radio_var.set("Option 1")
 
 # Create radiobuttons
-radio1 = tk.Radiobutton(root, text="Option 1", variable=radio_var, value="Option 1", command=update_label)
+radio1 = tk.Radiobutton(root, text="CASH", variable=radio_var, value="CASH", command=update_label)
 radio1.pack(anchor=tk.W)
 
-radio2 = tk.Radiobutton(root, text="Option 2", variable=radio_var, value="Option 2", command=update_label)
+radio2 = tk.Radiobutton(root, text="CHEQUE", variable=radio_var, value="CHEQUE", command=update_label)
 radio2.pack(anchor=tk.W)
 
-radio3 = tk.Radiobutton(root, text="Option 3", variable=radio_var, value="Option 3", command=update_label)
+radio3 = tk.Radiobutton(root, text="DD", variable=radio_var, value="DD", command=update_label)
 radio3.pack(anchor=tk.W)
 
 # Create a label to display the selected value
-label = tk.Label(root, text="Selected: Option 1")
+label = tk.Label(root, text=" ")
 label.pack()
+root.mainloop()
