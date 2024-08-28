@@ -2,6 +2,7 @@ import tkinter as tk
 from gtts import gTTS
 import pygame
 import os
+import time
 
 def text_to_audio():
     # Get the text from the Entry widget
@@ -13,16 +14,25 @@ def text_to_audio():
         audio_file = "temp_audio.mp3"
         tts.save(audio_file)
 
-        # Play the audio file
+        # Initialize the mixer and play the audio file
         pygame.mixer.init()
         pygame.mixer.music.load(audio_file)
         pygame.mixer.music.play()
-
-        # Clean up the temporary audio file after playing
+        # Wait for the music to finish playing
         while pygame.mixer.music.get_busy():
-            continue
-        os.remove(audio_file)
-
+            pygame.time.Clock().tick(10)
+        
+        # Stop the mixer and close any resources
+        pygame.mixer.music.stop()
+        pygame.mixer.quit()
+        entry.delete(0,'end')
+        # Give a short delay to ensure the file is fully released
+        time.sleep(0.1)
+        
+        # Remove the audio file after playback
+        if os.path.exists(audio_file):
+            os.remove(audio_file)
+ 
 # Create the main window
 root = tk.Tk()
 root.title("Text to Audio Converter")
