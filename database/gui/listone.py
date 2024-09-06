@@ -1,67 +1,44 @@
-import tkinter as tk
-from tkinter import ttk
 import mysql.connector
-from tkinter import messagebox
+import tkinter as tk
 
-def fetch_data_from_mysql(eno):
-    try:
-        # Connect to the MySQL database
-        conn = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='sriinformatics',
-            database='demobase'
-        )
-        cursor = conn.cursor()
-        cursor.execute("SELECT eno, ename, esal, egrade FROM myemp WHERE eno = %s", (eno,))
-        row = cursor.fetchone()
-        conn.close()
-        return row
-    except mysql.connector.Error as err:
-        messagebox.showerror("Database Error", str(err))
-        return None
+# MySQL connection
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="sriinformatics",
+    database="demobase"
+)
+cursor = conn.cursor()
 
-def display_data():
-    for widget in frame.grid_slaves():
-        if int(widget.grid_info()["row"]) > 1:
-            widget.grid_forget()
-
-    eno = entry_eno.get()
-    if not eno:
-        messagebox.showwarning("Input Error", "Please enter an Employee Number.")
-        return
-
-    row = fetch_data_from_mysql(eno)
-    if row:
-        for j, value in enumerate(row):
-            label = tk.Label(frame, text=value, borderwidth=1, relief="solid")
-            label.grid(row=2, column=j, sticky="nsew")
-    else:
-        messagebox.showinfo("No Record", f"No record found for Employee Number {eno}")
-
-# Create the main application window
+# Main window
 root = tk.Tk()
-root.title("Employee Record")
+root.geometry("400x200")
 
-# Create a frame for the grid
-frame = tk.Frame(root)
-frame.pack(fill=tk.BOTH, expand=True)
+# Input Label
+tk.Label(root, text='Enter Employee Number:', width=25).grid(row=1, column=1)
 
-# Add headers
-headers = ['Employee Number', 'Employee Name', 'Employee Salary', 'Employee Grade']
-for i, header in enumerate(headers):
-    label = tk.Label(frame, text=header, borderwidth=1, relief="solid")
-    label.grid(row=1, column=i, sticky="nsew")
+# Input Text Box
+entry = tk.Text(root, height=1, width=4, bg='yellow')
+entry.grid(row=1, column=2)
 
-# Add entry and button to input eno
-entry_label = tk.Label(root, text="Enter Employee Number:")
-entry_label.pack(pady=5)
+# Output Label
+output = tk.StringVar(value="Output")
+tk.Label(root, textvariable=output, width=30, fg='red').grid(row=3, column=1, columnspan=2)
 
-entry_eno = tk.Entry(root)
-entry_eno.pack(pady=5)
+def show_details():
+    eno = entry.get('1.0', 'end').strip()
+    try:
+        val = int(eno)
+        cursor.execute("SELECT * FROM myemp WHERE eno = %s", (val,))
+        emp = cursor.fetchone()
+        output.set(f"Employee Details: {emp}" if emp else "Employee not found")
+    except ValueError:
+        output.set("Invalid input. Please enter a valid integer.")
+    except mysql.connector.Error as e:
+        output.set(f"Database error: {e}")
 
-fetch_button = tk.Button(root, text="Fetch Record", command=display_data)
-fetch_button.pack(pady=10)
+# Show Details Button
+tk.Button(root, text='Show Details', width=15, bg='red', command=show_details).grid(row=1, column=4)
 
-# Run the application
+# Start Tkinter main loop
 root.mainloop()
