@@ -4,7 +4,7 @@ from tkinter import Entry, END
 
 # Initialize Tkinter window
 my_w = tk.Tk()
-my_w.geometry("500x300")  # Increased width for better visibility
+my_w.geometry("500x300")  # Adjusted width and height for better visibility
 
 # Connect to MySQL database
 my_connect = mysql.connector.connect(
@@ -17,13 +17,13 @@ my_connect = mysql.connector.connect(
 my_conn = my_connect.cursor()
 
 # Query to select data
-my_conn.execute("SELECT * FROM student LIMIT 10")
+my_conn.execute("SELECT * FROM myemp LIMIT 10")
 
-# Create headings
-headings = ["eno", "ename", "esal", "egrade"]
+# Fetch column names
+column_names = [desc[0] for desc in my_conn.description]
 
 # Create heading labels
-for col, heading in enumerate(headings):
+for col, heading in enumerate(column_names):
     label = tk.Label(my_w, text=heading, font=('Helvetica', 10, 'bold'))
     label.grid(row=0, column=col)
 
@@ -31,9 +31,10 @@ for col, heading in enumerate(headings):
 i = 1  # Start from row 1 as row 0 is for headings
 for student in my_conn:
     for j in range(len(student)):
-        e = Entry(my_w, width=15, fg='blue')
+        e = Entry(my_w, width=15, fg='blue')  # Increased width for better visibility
         e.grid(row=i, column=j)
-        e.insert(END, student[j])
+        # Convert student[j] to string before inserting
+        e.insert(END, str(student[j]))
     i += 1
 
 # Start Tkinter main loop
