@@ -1,33 +1,23 @@
-import tkinter as tk
+from tkinter import *
 
-# Function to update the label text with the selected listbox values
-def update_label(event):
-    # Get the selected items
-    selected_indices = listbox.curselection()
-    selected_values = [listbox.get(i) for i in selected_indices]
-    
-    # Update the label text
-    label.config(text=f"Selected: {', '.join(selected_values)}")
+root=Tk()
 
-# Create the main window
-root = tk.Tk()
-root.title("Listbox Example")
+lbx=Listbox(selectmode=MULTIPLE)
+lbx.pack()
 
-# Create a listbox with multiple selection mode
-listbox = tk.Listbox(root, selectmode=tk.MULTIPLE)
-listbox.pack()
+def uilist(event):
+ si=lbx.curselection()
+ sv=[lbx.get(i) for i in si]
+ lb.config(text=f"Selected:{','.join(sv)}")
 
-# Populate the listbox with options
-options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]
-for option in options:
-    listbox.insert(tk.END, option)
 
-# Bind the listbox selection event to the update_label function
-listbox.bind("<<ListboxSelect>>", update_label)
+items=['pen','pencil','paper','eraser','sharpner']
 
-# Create a label to display the selected values
-label = tk.Label(root, text="Selected: ")
-label.pack()
+for i in items:
+    lbx.insert(END,i)
 
-# Run the application
-root.mainloop()
+lbx.bind("<<ListboxSelect>>",uilist)
+
+lb=Label(text="selected:")
+lb.pack()
+mainloop()
