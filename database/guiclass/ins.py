@@ -12,8 +12,7 @@ label1 = Label(root, text="ENO", width=20,height=2).grid(row=1, column=0)
 label2 = Label(root, text="ENAME", width=20,height=2).grid(row=2, column=0)
 label3 = Label(root, text="ESAL", width=20,height=2).grid(row=3, column=0)
 label4 = Label(root, text="EGRADE", width=20, height=2).grid(row=4, column=0)
-label8 = Label(root, width=10, height=2).grid(row=7, column=2)
-label9 = Label(root, width=10, height=2).grid(row=7, column=4)
+
 
 e1 = Entry(root, width=30, borderwidth=5)
 e1.grid(row=1, column=2)
