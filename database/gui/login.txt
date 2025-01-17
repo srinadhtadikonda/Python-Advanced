@@ -1,0 +1,64 @@
+create table users(user_id varchar(50),password | varchar(50));
+ 
+import tkinter as tk
+from tkinter import messagebox
+import mysql.connector
+
+# Function to verify user credentials
+def verify_user():
+    user_id = entry_user_id.get()
+    password = entry_password.get()
+    
+    # Connecting to MySQL database
+    try:
+        conn = mysql.connector.connect(
+            host="localhost",  # Your MySQL server address
+            user="root",  # Your MySQL username
+            password="sriinformatics",  # Your MySQL password
+            database="demobase"  # The database name
+        )
+
+        cursor = conn.cursor()
+
+        # Query to select user based on user_id and password
+        query = "SELECT * FROM users WHERE user_id = %s AND password = %s"
+        cursor.execute(query, (user_id, password))
+
+        # Fetch the result
+        result = cursor.fetchone()
+
+        if result:
+            messagebox.showinfo("Success", "Login Successful!")
+        else:
+            messagebox.showerror("Error", "User ID or Password is incorrect!")
+
+        # Close the connection
+        cursor.close()
+        conn.close()
+
+    except mysql.connector.Error as err:
+        messagebox.showerror("Database Error", f"Error: {err}")
+
+# Tkinter GUI setup
+root = tk.Tk()
+root.title("Login Form")
+
+# Create Labels and Entries for user ID and password
+label_user_id = tk.Label(root, text="User ID:")
+label_user_id.grid(row=0, column=0, padx=10, pady=10)
+
+entry_user_id = tk.Entry(root)
+entry_user_id.grid(row=0, column=1, padx=10, pady=10)
+
+label_password = tk.Label(root, text="Password:")
+label_password.grid(row=1, column=0, padx=10, pady=10)
+
+entry_password = tk.Entry(root, show="*")  # show "*" for password entry
+entry_password.grid(row=1, column=1, padx=10, pady=10)
+
+# Create Login button
+login_button = tk.Button(root, text="Login", command=verify_user)
+login_button.grid(row=2, columnspan=2, pady=10)
+
+# Run the Tkinter event loop
+root.mainloop()
