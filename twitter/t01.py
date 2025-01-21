@@ -1,16 +1,21 @@
 import tweepy
 
-# Your API credentials
-API_KEY = 'your_api_key'
-API_SECRET_KEY = 'your_api_secret_key'
-ACCESS_TOKEN = 'your_access_token'
-ACCESS_TOKEN_SECRET = 'your_access_token_secret'
+# Your API keys and access tokens
+BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAADOAyQEAAAAAzSPuwD1cefrMQM97xViycYoD4tA%3DSmjkZNH8vA1oLoZZBgEYKNAl1uJQ34MviDJsRo9SRET5dtdkcV'  # Replace with your actual Bearer Token
+API_KEY = 'vmItk283AdAVSZuUtG4dRubpJ'
+API_SECRET_KEY = 'UwjByc71l4mrjezmEu7g9z4VglA9ENfr4e5TsIPFxcUlDHgTpZ'
+ACCESS_TOKEN = '1103286637222457345-mRyKptzN3Y37X1rT6Yk5nQw7gxwlGM'
+ACCESS_TOKEN_SECRET = 'K5wRcFHtNYBfAIVJjWgsHispoEayXTeOTuiHmEU4HrInY'
 
-# Authenticate with the X API
-auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
-auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+# Create a Tweepy client
+client = tweepy.Client(
+    bearer_token=BEARER_TOKEN,
+    consumer_key=API_KEY,
+    consumer_secret=API_SECRET_KEY,
+    access_token=ACCESS_TOKEN,
+    access_token_secret=ACCESS_TOKEN_SECRET
+)
 
-# Create an API object
-api = tweepy.API(auth)
 # Post a tweet
-api.update_status("Hello, X! This is my bot's first tweet.")
+response = client.create_tweet(text="Hello, world! This is Sourav")
+print(f"Tweet posted successfully with ID: {response.data['id']}")
