@@ -83,7 +83,7 @@ def mycf():
  e1.delete(0,'end')
  e2.delete(0,'end')
  e3.delete(0,'end')
- tbx1.focus()
+ e1.focus()
 
 def myqf():
  root.destroy()
