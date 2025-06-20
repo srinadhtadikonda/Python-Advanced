@@ -58,7 +58,7 @@ def myfdiv():
   e3.delete(0,'end')
   a=int(e1.get())
   b=int(e2.get())
-  c=a/b
+  c=a//b
   e3.insert(0,c)
  except:
   messagebox.showinfo("Error","You Cannot divide a number with zero")
@@ -83,6 +83,7 @@ def mycf():
  e1.delete(0,'end')
  e2.delete(0,'end')
  e3.delete(0,'end')
+ tbx1.focus()
 
 def myqf():
  root.destroy()
@@ -115,4 +116,3 @@ btn9=Button(text="X",width=10,command=myqf)
 btn9.grid(row=5,column=2)
 
 mainloop()
-
