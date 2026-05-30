@@ -1,26 +1,27 @@
 from tkinter import *
 
 root = Tk()
-root.title("Radiobutton Example")
 
-radio_var = StringVar()
-radio_var.set("Option 1")
+pay = StringVar()
+pay.set("CASH")
 
-def update_label():
-    selected_value = radio_var.get()
-    label.config(text=f"Selected: {selected_value}")
+def updatepay():
+    lb2.config(text=pay.get())
 
+rb1 = Radiobutton(root, text="CASH", variable=pay, value="CASH", command=updatepay)
+rb1.grid(row=0, column=0, sticky=W)
 
-radio1 = Radiobutton(root, text="CASH", variable=radio_var, value="CASH", command=update_label)
-radio1.pack(anchor=W)
+rb2 = Radiobutton(root, text="CHEQUE", variable=pay, value="CHEQUE", command=updatepay)
+rb2.grid(row=1, column=0, sticky=W)
 
-radio2 = Radiobutton(text="CHEQUE", variable=radio_var, value="CHEQUE", command=update_label)
-radio2.pack(anchor=W)
+rb3 = Radiobutton(root, text="DD", variable=pay, value="DD", command=updatepay)
+rb3.grid(row=2, column=0, sticky=W)
 
-radio3 =Radiobutton(text="DD", variable=radio_var, value="DD", command=update_label)
-radio3.pack(anchor=W)
+lb1 = Label(root, text="PAYMENT MODE")
+lb1.grid(row=3, column=0)
 
-label = Label(text=" ")
-label.pack()
+lb2 = Label(root, text="")
+lb2.grid(row=3, column=1)
+
 
 root.mainloop()
