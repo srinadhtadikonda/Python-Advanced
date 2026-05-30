@@ -1,51 +1,38 @@
-import tkinter as tk
-from tkinter import messagebox
+from tkinter import *
 
-# Create main window
-root = tk.Tk()
-root.title("Course Selection")
-root.geometry("350x300")
+root = Tk()
 
-# Title Label
-title_label = tk.Label(root, text="Select Courses", font=("Arial", 16, "bold"))
-title_label.pack(pady=10)
+d = IntVar()
+p = IntVar()
+j = IntVar()
 
-# Variables for checkboxes
-dca_var = tk.IntVar()
-java_var = tk.IntVar()
-python_var = tk.IntVar()
+def csel():
+    courses = []
 
-# Function to display selected courses
-def show_courses():
-    selected = []
+    if d.get():
+        courses.append("DCA")
 
-    if dca_var.get():
-        selected.append("DCA")
+    if p.get():
+        courses.append("PYTHON")
 
-    if java_var.get():
-        selected.append("Java")
+    if j.get():
+        courses.append("JAVA")
 
-    if python_var.get():
-        selected.append("Python")
+    lb2.config(text=", ".join(courses))
 
-    if selected:
-        result_label.config(text="Selected Courses: " + ", ".join(selected))
-    else:
-        result_label.config(text="No Course Selected")
+cb1 = Checkbutton(root, text="DCA", variable=d, command=csel)
+cb1.grid(row=0, column=0, sticky=W)
 
-# Checkboxes
-dca_cb = tk.Checkbutton(root, text="DCA", variable=dca_var, command=show_courses)
-dca_cb.pack(anchor="w", padx=30)
+cb2 = Checkbutton(root, text="PYTHON", variable=p, command=csel)
+cb2.grid(row=1, column=0, sticky=W)
 
-java_cb = tk.Checkbutton(root, text="Java", variable=java_var, command=show_courses)
-java_cb.pack(anchor="w", padx=30)
+cb3 = Checkbutton(root, text="JAVA", variable=j, command=csel)
+cb3.grid(row=2, column=0, sticky=W)
 
-python_cb = tk.Checkbutton(root, text="Python", variable=python_var, command=show_courses)
-python_cb.pack(anchor="w", padx=30)
+lb1 = Label(root, text="You Selected")
+lb1.grid(row=3, column=0, sticky=W)
 
-# Result Label
-result_label = tk.Label(root, text="No Course Selected", font=("Arial", 12), fg="blue")
-result_label.pack(pady=20)
+lb2 = Label(root, text="")
+lb2.grid(row=3, column=1, sticky=W)
 
-# Run application
 root.mainloop()
