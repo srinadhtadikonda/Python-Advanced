@@ -1,0 +1,84 @@
+RDBMS (Relational Database Management System)
+
+SQL (Structued Query Languag)
+---
+    It was developed by IBM (International Business Machines)
+    DDL( Data Definition Language)
+        Create, Alter, Drop
+    DML( Data Mainpulation Language)
+        Insert, Delete, Update
+    DCL ( Data Control Language)
+        Grant, Revoke
+    TCL ( Transaction Control Language)
+        Commit, Rollbac
+    DSL ( Data Selection Language)
+        Select 
+
+    
+    Python  --- MySQL
+    Java   ---- Oracle
+    .Net   --- MS SQL Server
+
+    Create Command:
+        used to create table.
+        Syntax:
+            Create table <tablename>(col1 datatype,col2 datatype, col3 datatype....);
+        Ex:
+            create table employee(empid int, ename varchar(20), salary float);
+
+    Insert Command:
+        used to store data into a table.
+        Syntax:
+            insert into <tablename>(col1, col2, col3) values (val1,val2, val3);
+        Ex:
+            insert into employee(empid, ename, salary) values (1001, 'raju',45000.0)
+
+    Update Command:
+        used to modify data.
+        Syntax:
+            update <tablename> set col1 = new value,col2=new value where condititon;
+        Ex:
+            update employee set ename ='kishore' where empid=1001;
+
+    Delete Command:
+        used to remove a record.
+        Syntax:
+            delete from <tablename> where <logic>;
+        Ex:
+            delete from employee where empid=1001;
+
+    Select Command:
+        used to display data.
+        Syntax:
+            select col1, col2,.... from <tablename>;
+        Ex:
+            select empid, ename, salary from employee;
+            Or
+            Select * from employee;
+
+Python and MySQL Bridge:
+---
+    install mysql-connector-Python
+    Or
+    install pymysql
+
+    pip install mysql-connector-python 
+
+    1. import mysql.connector
+    2. create a connection object 
+       con = mysql.connector.connect(host='localhost', user='root', password='root123', Database='mydab')
+    3. create query string
+       sqlstr = 'insert into employee(empid, ename,salary) values(%s, %s, %s)'
+    4. Create cursor object 
+        cur = con.cursor()
+    5. Execute query
+        cur.Execute(sqlstr, (eno, ena,sal))
+    6. use commit 
+        con.commit()
+    7. Close resources
+       cur.close()
+       con.close()
+       
+
+    
+    
