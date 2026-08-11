@@ -1,14 +1,8 @@
-import turtle
-
-ws = turtle.Screen()
-geekyTurtle = turtle.Turtle()
-
-geekyTurtle.speed(3)
-geekyTurtle.color("blue")
-geekyTurtle.pensize(3)
-
+from turtle import *
+speed(3)
+color("blue")
+pensize(3)
 for i in range(8):
-    geekyTurtle.forward(100)
-    geekyTurtle.left(45)
-
+    forward(100)
+    left(45)
 turtle.done()
