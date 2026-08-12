@@ -1,3 +1,4 @@
+#color star
 import turtle
 
 scr = turtle.Screen()
