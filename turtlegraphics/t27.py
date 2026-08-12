@@ -1,3 +1,4 @@
+#box pattern
 # import turtle library
 import turtle             
 my_wn = turtle.Screen()
