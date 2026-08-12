@@ -1,79 +1,120 @@
-# importing libraries
+#star sky
 import turtle
 import random
 
+# ==========================================
+# CREATE SCREEN
+# ==========================================
 
-# creating turtle object
+screen = turtle.Screen()
+screen.setup(1200, 700)
+screen.bgcolor("black")
+screen.title("⭐ Starry Sky 🌙")
+
+
+# ==========================================
+# CREATE TURTLE
+# ==========================================
+
 t = turtle.Turtle()
-
-# to activate turtle graphics Screen
-w = turtle.Screen()
-
-# setting speed of turtle
 t.speed(0)
+t.hideturtle()
 
-# giving the background color of turtle
-# graphics screen
-w.bgcolor("black")
 
-# giving the color of pen to our turtle
-# for drawing
-t.color("white")
+# ==========================================
+# FUNCTION TO DRAW A STAR
+# ==========================================
 
-# giving title to our turtle graphics window
-w.title("Starry Sky")
+def draw_star(x, y, size):
 
-# making function to draw the stars
-def stars():
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+
+    t.color("white")
+    t.begin_fill()
+
     for i in range(5):
-        t.fd(10)
+        t.forward(size)
+        t.right(144)
+
+    t.end_fill()
+
+
+# ==========================================
+# DRAW RANDOM STARS
+# ==========================================
+
+for i in range(100):
+
+    x = random.randint(-550, 550)
+    y = random.randint(-300, 300)
+    size = random.randint(5, 15)
+
+    draw_star(x, y, size)
+
+
+# ==========================================
+# DRAW MOON
+# ==========================================
+
+t.penup()
+t.goto(-80, 150)
+t.pendown()
+
+t.color("white")
+t.begin_fill()
+
+t.circle(80)
+
+t.end_fill()
+
+
+# ==========================================
+# CREATE MOON SHADOW
+# ==========================================
+
+t.penup()
+t.goto(-45, 175)
+t.pendown()
+
+t.color("black")
+t.begin_fill()
+
+t.circle(80)
+
+t.end_fill()
+
+
+# ==========================================
+# ADD LARGER YELLOW STARS
+# ==========================================
+
+for i in range(10):
+
+    x = random.randint(-550, 550)
+    y = random.randint(-300, 300)
+
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+
+    t.color("yellow")
+
+    for j in range(5):
+        t.forward(12)
         t.right(144)
 
 
-# loop for making number of stars
-for i in range(100):
-  
-    # generating random integer values for x and y
-    x = random.randint(-640, 640)
-    y = random.randint(-330, 330)
-    
-    # calling the function stars to draw the 
-    # stars at random x,y value
-    stars()
-    
-    # took up the turtle's pen
-    t.up()
-    
-    # go at the x,y coordinate generated above
-    t.goto(x, y)
-    
-    # took down the pen to draw
-    t.down()
+# ==========================================
+# HIDE TURTLE
+# ==========================================
 
-# for making our moon looking up the pen
-t.up()
-
-# going at the specific coordinated
-t.goto(0, 170)
-
-# took down the pen to start drawing
-t.down()
-
-# giving color to turtle's pen
-t.color("white")
-
-# start filling the color
-t.begin_fill()
-
-# making our moon
-t.circle(80)
-
-# stop filling the color
-t.end_fill()
-
-# after drawing hiding the turtle from
-# the window
 t.hideturtle()
 
-# terminated the window after clicking
-w.exitonclick()
+
+# ==========================================
+# KEEP WINDOW OPEN
+# ==========================================
+
+screen.exitonclick()
