@@ -1,5 +1,4 @@
-# Python program to draw smile 
-# face emoji using turtle
+#draw smile 
 import turtle
 
 # turtle object
@@ -52,3 +51,4 @@ pen.begin_fill()
 pen.circle(10, 180)
 pen.end_fill()
 pen.hideturtle()
+done()
