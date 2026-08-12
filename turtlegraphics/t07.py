@@ -1,3 +1,4 @@
+#polygon
 from turtle import *
 speed(3)
 color("blue")
