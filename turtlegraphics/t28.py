@@ -1,3 +1,4 @@
+#colored polygon
 # import turtle library
 import turtle             
 colors = [ "red","purple","blue","green","orange","yellow"]
